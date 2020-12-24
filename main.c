@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <math.h>
 #include <locale.h>
-int maxdig(int n)
+
+int maxdig(int n, int max)
 {
-if(n<10){
-        return n;
-}
-else if (n%10>maxdig(n/10))
+    if(n!=0)
     {
-return n%10;
-}
-else {
-    return (n/10);
-}
+        if(n%10 > max)
+        {
+            max = n%10;
+        }
+        return maxdig(n/10, max);
+    }
+return max;
 }
 
 
@@ -39,7 +39,7 @@ int main()
 {   setlocale(LC_ALL,"RUS");
     printf("Задание №1-Рекурсивно описать функцию maxdig(N), которая находит наибольшую цифру в десятичной записи неотрицательного целого числа N\n (Задание 3 из 5-го таска)\n");
     printf("Задание №2-Дана последовательность чисел, завершающаяся числом -1. Найдите сумму всех этих чисел, не используя цикл.\n (Задание 5 из 5-го таска)\n");
-    int p=5,a,b,c=0,s=0;
+    int p=5,a,b,c=0,s=0,max;
     printf("|Для выхода введите 0|\n");
     printf("\n");
 
@@ -53,7 +53,7 @@ int main()
         case 1:
             printf("Введите любое неотрицательное число(до 9-ти символов):");
             scanf("%d",&a);
-            printf("Наибольшее число=%d\n",maxdig(a));
+            printf("Наибольшее число=%d\n",maxdig(a,max));
             printf("\n");
             break;
         case 2:
